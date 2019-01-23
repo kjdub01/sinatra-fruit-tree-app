@@ -31,7 +31,13 @@ class HomeownerController < ApplicationController
   end
 
   get '/homeowners/:id' do
-    @homeowner = Homeowner.find_by(id: params[:id]) 
+    @homeowner = Homeowner.find_by(id: params[:id])
+
   	erb :'homeowners/show'
+  end
+
+  get '/logout' do
+    session.clear
+    redirect '/'
   end
 end
