@@ -14,7 +14,8 @@
 ActiveRecord::Schema.define(version: 20190123020156) do
 
   create_table "homeowners", force: :cascade do |t|
-    t.string   "name"
+    t.string   "first_name"
+    t.string   "last_name"
     t.string   "email"
     t.string   "password_digest"
     t.datetime "created_at",      null: false
