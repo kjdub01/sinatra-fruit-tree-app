@@ -7,10 +7,11 @@ class HomeownerController < ApplicationController
   post '/homeowners' do 
     if params[:first_name] != "" && params[:last_name] != "" && params[:email] != "" && params[:password] != ""
       @homeowner = Homeowner.create(params)
+      session[:homeowner_id] = @homeowner.id
 
       redirect "/homeowners/#{@homeowner.id}"
     else
-
+      redirect '/signup' #(need to include flash message)
     end
   end
 
