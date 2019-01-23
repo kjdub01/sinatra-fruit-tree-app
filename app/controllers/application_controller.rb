@@ -23,5 +23,4 @@ class ApplicationController < Sinatra::Base
   		@current_homeowner ||= Homeowner.find_by(id: session[:homeowner_id])
   	end
   end
-
 end
