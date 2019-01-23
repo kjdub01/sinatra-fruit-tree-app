@@ -1,7 +1,12 @@
 class HomeownerController < ApplicationController
 
-  get '/signup' do 
+  get '/signup' do #(show signup.erb) 
+    erb :signup
+  end
 
+  post '/homeowners' do 
+    binding.pry
+    #@homeowner = Homeowner.create(params)
   end
 
   get '/login' do #(show login.erb)
@@ -16,7 +21,7 @@ class HomeownerController < ApplicationController
   	
   		redirect "homeowners/@{homeowner.id}"
   	else
-
+      redirect "/signup"
   	end
   end
 
