@@ -5,8 +5,13 @@ class HomeownerController < ApplicationController
   end
 
   post '/homeowners' do 
-    binding.pry
-    #@homeowner = Homeowner.create(params)
+    if params[:first_name] != "" && params[:last_name] != "" && params[:email] != "" && params[:password] != ""
+      @homeowner = Homeowner.create(params)
+
+      redirect "/homeowners/#{@homeowner.id}"
+    else
+
+    end
   end
 
   get '/login' do #(show login.erb)
@@ -19,13 +24,14 @@ class HomeownerController < ApplicationController
   	if @homeowner && @homeowner.authenticate(params[:password])
   		session[:homeowner_id] = @homeowner.id
   	
-  		redirect "homeowners/@{homeowner.id}"
+  		redirect "homeowners/#{@homeowner.id}"
   	else
       redirect "/signup"
   	end
   end
 
-  get '/homeowners/:id' do 
-  	"homeowners show page"
+  get '/homeowners/:id' do
+    @homeowner = Homeowner.find_by(id: params[:id]) 
+  	erb :'homeowners/show'
   end
 end
