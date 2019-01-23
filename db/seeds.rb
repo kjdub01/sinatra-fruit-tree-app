@@ -19,12 +19,13 @@ Tree.create(variety: "Ruby Red Grapefruit", size: "house", fruit_weight: 87.3, h
 
 #Use AR to pre associate data to 5 homeowners:
 
-kate2.tree.create(variety: "Fig", size: "10 ft", fruit_weight: 16)
-roy.tree.create(variety: "Kumquat", size: "shrub", fruit_weight: 15)
-avi.tree.create(variety: "Lime", size: "15ft", fruit_weight: 35)
+kate2.trees.create(variety: "Fig", size: "10 ft", fruit_weight: 16)
+roy.trees.create(variety: "Kumquat", size: "shrub", fruit_weight: 15)
+avi.trees.create(variety: "Lime", size: "15ft", fruit_weight: 35)
 
 
-roy_tree = roy.tree.build(variety: "Blood Orange", size: "Medium", fruit_weight: 30)
+roy_tree = roy.trees.build(variety: "Blood Orange", size: "Medium", fruit_weight: 30)
 roy_tree.save
-kate_tree = kate.tree.create(variety: "Loquat", size: "small", fruit_weight: 18.2)
+
+kate_tree = kate.trees.create(variety: "Loquat", size: "small", fruit_weight: 18.2)
 kate_tree.save
