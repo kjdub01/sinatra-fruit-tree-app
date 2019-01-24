@@ -6,5 +6,6 @@ end
 
 use Rack::MethodOverride
 
-use HomeownerController
+use HomeownersController
+use TreesController
 run ApplicationController
