@@ -14,6 +14,16 @@
     <link rel="stylesheet" href="/stylesheets/main.css" />
   </head>
   <body>
+
+
+    <div class="nav">
+      <a href="/login">Login</a>
+      <a href="/signup">Sign Up</a>
+      <a href="/homeowner/#{current_user.id)">Homeowner Page</a>
+      <a href="/logout">Logout</a>
+    </div>
+
+
     <div class="wrapper">
 
         <%= yield %>
