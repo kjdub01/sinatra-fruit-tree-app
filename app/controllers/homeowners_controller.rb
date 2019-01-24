@@ -31,7 +31,7 @@ class HomeownerController < ApplicationController
   	end
   end
 
-  get '/homeowners/:id' do
+  get '/homeowners/:id' do #(show homeowners show.erb)
     @homeowner = Homeowner.find_by(id: params[:id])
 
   	erb :'homeowners/show'
