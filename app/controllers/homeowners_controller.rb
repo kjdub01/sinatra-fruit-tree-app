@@ -1,4 +1,4 @@
-class HomeownerController < ApplicationController
+class HomeownersController < ApplicationController
 
   get '/signup' do #(show signup.erb) 
     erb :signup
