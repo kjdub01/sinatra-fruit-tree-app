@@ -17,7 +17,7 @@ class TreesController < ApplicationController
 	  end
 	end
 
-	get '/trees/:id'  do
+	get '/trees/:id'  do	
 	  @tree = Tree.find(params[:id])
 	  erb :'/trees/show'
 	end
