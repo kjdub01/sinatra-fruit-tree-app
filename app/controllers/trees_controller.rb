@@ -23,6 +23,7 @@ class TreesController < ApplicationController
 	end
 
 	get '/trees/:id/edit' do
-		erb :'trees/edit'
+	  @tree = Tree.find(params[:id])
+	  erb :'trees/edit'
 	end
 end
