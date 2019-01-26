@@ -1,1 +1,15 @@
-edit.erb
+<h2>Edit Your Tree</h2>
+
+<form action="/trees/<%= @tree.id %>" method="POST">
+	<input type="hidden" name="_method" value="patch">
+	<label>Variety</label>
+	<input type="text" name="variety" value="<%= @tree.variety %>">
+
+	<label>Size</label>
+	<input type="text" name="size" value="<%= @tree.size %>">
+
+	<label>Fruit Weight</label>
+	<input type="text" name="fruit_weight" value="<%= @tree.fruit_weight %>">
+
+	<input type="submit" value="Edit Tree">
+</form>
