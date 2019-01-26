@@ -16,4 +16,9 @@ class TreesController < ApplicationController
 	  	redirect '/trees/new'
 	  end
 	end
+
+	get '/trees/:id'  do
+	  @tree = Tree.find(params[:id])
+	  erb :'/trees/show'
+	end
 end
