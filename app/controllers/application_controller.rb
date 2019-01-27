@@ -26,5 +26,9 @@ class ApplicationController < Sinatra::Base
   	def current_user
   		@current_homeowner ||= Homeowner.find_by(id: session[:homeowner_id])
   	end
+
+    def authorized_to_edit?(tree)
+      tree.homeowner == current_user
+    end
   end
 end
