@@ -18,12 +18,27 @@ class TreesController < ApplicationController
 	end
 
 	get '/trees/:id'  do	
-	  @tree = Tree.find(params[:id])
+	  set_tree
 	  erb :'/trees/show'
 	end
 
 	get '/trees/:id/edit' do
-	  @tree = Tree.find(params[:id])
-	  erb :'trees/edit'
+	  set_tree
+	  erb :'/trees/edit'
+	end
+
+	patch '/trees/:id' do
+	  set_tree
+
+	  @tree.update(variety: params[:variety], size: params[:size], fruit_weight: params[:fruit_weight])
+
+	  redirect "/trees/#{@tree.id}"
+	end
+
+
+	private
+
+	def set_tree
+		@tree = Tree.find(params[:id])
 	end
 end
