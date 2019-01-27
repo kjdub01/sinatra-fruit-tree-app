@@ -23,16 +23,30 @@ class TreesController < ApplicationController
 	end
 
 	get '/trees/:id/edit' do
-	  set_tree
-	  erb :'/trees/edit'
+		set_tree
+		if logged_in?
+	  	  if @tree.homeowner == current_user
+	  	    erb :'/trees/edit'
+	  	  else
+	  	    redirect "homeowners/#{current_user.id}"
+	  	  end
+	    else
+	  	  redirect '/'
+	  end
 	end
 
 	patch '/trees/:id' do
 	  set_tree
-
-	  @tree.update(variety: params[:variety], size: params[:size], fruit_weight: params[:fruit_weight])
-
-	  redirect "/trees/#{@tree.id}"
+	  if logged_in?
+	  	if @tree.homeowner == current_user
+	  	  @tree.update(variety: params[:variety], size: params[:size], fruit_weight: params[:fruit_weight])
+	  	  redirect "/trees/#{@tree.id}"
+	  	 else
+	  	   redirect "homeowners/#{current_user.id}"
+	  	end
+	  else
+	  	redirect '/'
+	  end
 	end
 
 
