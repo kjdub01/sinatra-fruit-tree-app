@@ -9,4 +9,8 @@
 
 <a href="/trees/<%= @tree.id %>/edit">Edit Tree</a>
 
+<form action="/trees/<%= @tree.id %>" method="POST">
+	<input type="hidden" name="_method" value="DELETE">
+	<input type="submit" name="delete" value="Delete Tree">
+</form>
 <% end %>
