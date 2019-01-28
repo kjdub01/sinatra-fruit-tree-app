@@ -28,9 +28,12 @@ Specs:
 - [x] Include user input validations
 	Homeowners can't create blank Homeowner or Tree
 
-- [ ] BONUS - not required - Display validation failures to user with error message (example form URL e.g. /posts/new)
+- [x] BONUS - not required - Display validation failures to user with error message (example form URL e.g. /posts/new)
+	flash messages display validations to Homeowners
 
 - [ ] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
+
+	pending... a short description, and link to MIT licesnse are there
 
 Confirm
 - [ ] You have a large number of small Git commits
