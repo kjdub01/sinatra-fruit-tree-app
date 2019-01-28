@@ -14,7 +14,7 @@ class TreesController < ApplicationController
 	  	@tree = Tree.create(variety: params[:variety], size: params[:size], fruit_weight: params[:fruit_weight], homeowner_id: current_user.id)
 	  	redirect "/trees/#{@tree.id}"
 	  else
-	  	flash[:message] = "All fields must be filled in to add a tree. If no fruit has been harvested enter 0"
+	  	flash[:errors] = "All fields must be filled in to add a tree. If no fruit has been harvested enter 0"
 	  	redirect '/trees/new'
 	  end
 	end
@@ -45,7 +45,7 @@ class TreesController < ApplicationController
 	  	  @tree.update(variety: params[:variety], size: params[:size], fruit_weight: params[:fruit_weight])
 	  	  redirect "/trees/#{@tree.id}"
 	  	else
-	  	  flash[:message] = "Only the Homeowner of this tree can edit this tree"
+	  	  flash[:errors] = "Only the Homeowner of this tree can edit this tree"
 	  	  redirect "homeowners/#{current_user.id}"
 	  	end
 	  else
@@ -60,7 +60,7 @@ class TreesController < ApplicationController
 	    @tree.destroy
 	    redirect "/homeowners/#{current_user.id}"
 	  else
-	  	flash[:message]	= "Only the Homeowner of this tree can delete this tree"
+	  	flash[:errors]	= "Only the Homeowner of this tree can delete this tree"
 	  	redirect "/homeowners/#{current_user.id}"
 	  end
 	end
