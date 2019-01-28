@@ -11,6 +11,7 @@ class HomeownersController < ApplicationController
 
       redirect "/homeowners/#{@homeowner.id}"
     else
+      flash[:message] = "All fields must be filled out to Sign Up"
       redirect '/signup' #(need to include flash message)
     end
   end
@@ -27,7 +28,8 @@ class HomeownersController < ApplicationController
   	
   		redirect "homeowners/#{@homeowner.id}"
   	else
-      redirect "/signup"
+      flash[:message] = "Your email or password is inccorect. Please try again or Sign Up to continue"
+      redirect "/login"
   	end
   end
 
