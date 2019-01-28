@@ -17,10 +17,14 @@
 
 
     <div class="nav">
-      <a href="/login">Login</a>
-      <a href="/signup">Sign Up</a>
-      <a href="/trees/new">New Tree</a>
-      <a href="/logout">Logout</a>
+      <% if logged_in? %>
+        <a href="/homeowners/<%= current_user.id %>">Homeowner Page</a>
+        <a href="/trees/new">New Tree</a>
+        <a href="/logout">Logout</a>
+      <% else %>
+        <a href="/login">Login</a>
+        <a href="/signup">Sign Up</a>
+      <% end %>
     </div>
 
 
