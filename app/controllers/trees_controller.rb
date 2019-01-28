@@ -10,9 +10,11 @@ class TreesController < ApplicationController
 	  end
 
 	  if form_is_filled
+	  	flash[:message] = "Your tree was successfully created"
 	  	@tree = Tree.create(variety: params[:variety], size: params[:size], fruit_weight: params[:fruit_weight], homeowner_id: current_user.id)
 	  	redirect "/trees/#{@tree.id}"
 	  else
+	  	flash[:message] = "All fields must be filled in to add a tree. If no fruit has been harvested enter 0"
 	  	redirect '/trees/new'
 	  end
 	end
@@ -39,9 +41,11 @@ class TreesController < ApplicationController
 	  set_tree
 	  if logged_in?
 	  	if @tree.homeowner == current_user && form_is_filled
+	  	  flash[:message] = "Your tree was successfully updated"
 	  	  @tree.update(variety: params[:variety], size: params[:size], fruit_weight: params[:fruit_weight])
 	  	  redirect "/trees/#{@tree.id}"
 	  	else
+	  	  flash[:message] = "Only the Homeowner of this tree can edit this tree"
 	  	  redirect "homeowners/#{current_user.id}"
 	  	end
 	  else
@@ -52,9 +56,11 @@ class TreesController < ApplicationController
 	delete '/trees/:id' do 
 	  set_tree
 	  if authorized_to_edit?(@tree)
+	  	flash[:message] = "Your tree was deleted"
 	    @tree.destroy
 	    redirect "/homeowners/#{current_user.id}"
 	  else
+	  	flash[:message]	= "Only the Homeowner of this tree can delete this tree"
 	  	redirect "/homeowners/#{current_user.id}"
 	  end
 	end
