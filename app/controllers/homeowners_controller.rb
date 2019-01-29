@@ -5,13 +5,13 @@ class HomeownersController < ApplicationController
   end
 
   post '/homeowners' do 
-    if params[:first_name] != "" && params[:last_name] != "" && params[:email] != "" && params[:password] != ""
-      @homeowner = Homeowner.create(params)
+    @homeowner = Homeowner.new(params)
+    if @homeowner.save
       session[:homeowner_id] = @homeowner.id
 
       redirect "/homeowners/#{@homeowner.id}"
     else
-      flash[:errors] = "All fields must be filled out to Sign Up"
+      flash[:errors] = "Account creation failure: #{@Homeowner.errors.full_messages.to_sentence}"
       redirect '/signup' #(need to include flash message)
     end
   end
