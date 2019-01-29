@@ -20,16 +20,23 @@ class ApplicationController < Sinatra::Base
 
   helpers do 
 
-  	def logged_in?
+    def logged_in?
   	  !!current_user
-  	end
+    end
 
-  	def current_user
+    def current_user
   		@current_homeowner ||= Homeowner.find_by(id: session[:homeowner_id])
-  	end
+    end
 
     def authorized_to_edit?(tree)
       tree.homeowner == current_user
+    end
+
+    def redirect_if_not_logged_in
+      if !logged_in?
+        flash[:errors] = "You must be logged in to view this page"
+        redirect '/'
+      end
     end
   end
 end
