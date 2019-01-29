@@ -7,5 +7,6 @@ end
 use Rack::MethodOverride
 
 use HomeownersController
+use SessionsController
 use TreesController
 run ApplicationController
