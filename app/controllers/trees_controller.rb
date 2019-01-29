@@ -5,17 +5,14 @@ class TreesController < ApplicationController
 	end
 
 	post '/trees' do
-	  if !logged_in?
-	  	redirect '/'
-	  end
-
+	  redirect_if_not_logged_in
 	  if form_is_filled
-	  	flash[:message] = "Your tree was successfully created"
-	  	@tree = Tree.create(variety: params[:variety], size: params[:size], fruit_weight: params[:fruit_weight], homeowner_id: current_user.id)
-	  	redirect "/trees/#{@tree.id}"
+	    flash[:message] = "Your tree was successfully created"
+	    @tree = Tree.create(variety: params[:variety], size: params[:size], fruit_weight: params[:fruit_weight], homeowner_id: current_user.id)
+	    redirect "/trees/#{@tree.id}"
 	  else
-	  	flash[:errors] = "All fields must be filled in to add a tree. If no fruit has been harvested enter 0"
-	  	redirect '/trees/new'
+	    flash[:errors] = "All fields must be filled in to add a tree. If no fruit has been harvested enter 0"
+	    redirect '/trees/new'
 	  end
 	end
 
@@ -26,30 +23,24 @@ class TreesController < ApplicationController
 
 	get '/trees/:id/edit' do
 	  set_tree
-	  if logged_in?
-	    if @tree.homeowner == current_user
-	  	  erb :'/trees/edit'
-	  	else
-	  	  redirect "homeowners/#{current_user.id}"
-	  	end
+	  redirect_if_not_logged_in
+	  if @tree.homeowner == current_user
+	  	erb :'/trees/edit'
 	  else
-	    redirect '/'
+	  	redirect "homeowners/#{current_user.id}"
 	  end
 	end
 
 	patch '/trees/:id' do
 	  set_tree
-	  if logged_in?
-	  	if @tree.homeowner == current_user && form_is_filled
-	  	  flash[:message] = "Your tree was successfully updated"
-	  	  @tree.update(variety: params[:variety], size: params[:size], fruit_weight: params[:fruit_weight])
-	  	  redirect "/trees/#{@tree.id}"
-	  	else
-	  	  flash[:errors] = "Only the Homeowner of this tree can edit this tree"
-	  	  redirect "homeowners/#{current_user.id}"
-	  	end
+	  redirect_if_not_logged_in
+	  if @tree.homeowner == current_user && form_is_filled
+	  	flash[:message] = "Your tree was successfully updated"
+	  	@tree.update(variety: params[:variety], size: params[:size], fruit_weight: params[:fruit_weight])
+	  	redirect "/trees/#{@tree.id}"
 	  else
-	  	redirect '/'
+	  	flash[:errors] = "Only the Homeowner of this tree can edit this tree"
+	  	redirect "homeowners/#{current_user.id}"
 	  end
 	end
 
