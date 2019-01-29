@@ -18,7 +18,8 @@
 
     <div class="nav">
       <% if logged_in? %>
-        <a href="/homeowners/<%= current_user.id %>">Homeowner Page</a>
+        <a href="/homeowners/<%= current_user.id %>">Your Page</a>
+        <a href="/homeowners">Homeowners</a>
         <a href="/trees/new">New Tree</a>
         <a href="/logout">Logout</a>
       <% else %>
