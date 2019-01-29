@@ -1,0 +1,8 @@
+<h2>All Homeowners</h2>
+
+<% @homeowners.each do |homeowner| %>
+	<ul>
+		<li><%= homeowner.first_name %> <%=homeowner.last_name %></li>
+			<br>
+	</ul>
+<% end %>
