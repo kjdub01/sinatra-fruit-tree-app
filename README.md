@@ -4,4 +4,4 @@ Homeowners can create, edit, and delete their own trees.
 
 <a href="https://opensource.org/licenses/MIT">MIT License</a>
 
-Copyright <2019> <kjdub01>
+Copyright 2019 kjdub01
