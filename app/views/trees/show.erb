@@ -1,8 +1,8 @@
 <h2>Hi <%= current_user.first_name %>! Here is your Tree</h2>
 
-<p><%= @tree.variety %></p>
-<p><%= @tree.size %></p>
-<p><%= @tree.fruit_weight %>lbs</p>
+<p>Vareity: <%= @tree.variety %></p>
+<p>Size: <%= @tree.size %></p>
+<p>Weight in Pounds: <%= @tree.fruit_weight %>lbs</p>
 
 
 <% if authorized_to_edit?(@tree) %>
