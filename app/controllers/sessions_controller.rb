@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
 
       redirect "/homeowners/#{@homeowner.id}"
     else
-      flash[:errors] = "Account creation failure: #{@Homeowner.errors.full_messages.to_sentence}"
+      flash[:errors] = "Account creation failure: #{@homeowner.errors.full_messages.to_sentence}"
       redirect '/signup' #(need to include flash message)
     end
   end
