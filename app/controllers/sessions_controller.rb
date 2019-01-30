@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
   	
   		redirect "homeowners/#{@homeowner.id}"
   	else
-      flash[:errors] = "Your email or password is inccorect. Please try again or Sign Up to continue"
+      flash[:errors] = "Your email or password is incorrect. Please try again or Sign Up to continue"
       redirect "/login"
   	end
   end
