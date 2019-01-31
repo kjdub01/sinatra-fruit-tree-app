@@ -1,12 +1,13 @@
 class TreesController < ApplicationController
 
 	get '/trees/new' do
+	  redirect_if_not_logged_in
 	  erb :'/trees/new'
 	end
 
 	post '/trees' do
 	  redirect_if_not_logged_in
-	  if form_is_filled
+	  if form_is_filled?
 	    flash[:message] = "Your tree was successfully created"
 	    @tree = Tree.create(variety: params[:variety], size: params[:size], fruit_weight: params[:fruit_weight], homeowner_id: current_user.id)
 	    redirect "/trees/#{@tree.id}"
@@ -16,7 +17,8 @@ class TreesController < ApplicationController
 	  end
 	end
 
-	get '/trees/:id'  do	
+	get '/trees/:id'  do
+	  redirect_if_not_logged_in	
 	  set_tree
 	  erb :'/trees/show'
 	end
@@ -34,7 +36,8 @@ class TreesController < ApplicationController
 	patch '/trees/:id' do
 	  set_tree
 	  redirect_if_not_logged_in
-	  if @tree.homeowner == current_user && form_is_filled
+	  if @tree.homeowner == current_user && form_is_filled?
+	  	binding.pry
 	  	flash[:message] = "Your tree was successfully updated"
 	  	@tree.update(variety: params[:variety], size: params[:size], fruit_weight: params[:fruit_weight])
 	  	redirect "/trees/#{@tree.id}"
@@ -63,7 +66,7 @@ class TreesController < ApplicationController
 		@tree = Tree.find(params[:id])
 	end
 
-	def form_is_filled
+	def form_is_filled?
 		params[:variety] != "" && params[:size] != "" && params[:fruit_weight] != ""
 	end
 end
