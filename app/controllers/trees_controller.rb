@@ -26,10 +26,10 @@ class TreesController < ApplicationController
 	get '/trees/:id/edit' do
 	  set_tree
 	  redirect_if_not_logged_in
-	  if @tree.homeowner == current_user
+	  if @tree.homeowner == current_user 
 	  	erb :'/trees/edit'
-	  else
-	  	redirect "homeowners/#{current_user.id}"
+	  else flash[:errors] = "You can only edit your trees."
+	  	  redirect "/homeowners/#{current_user.id}"
 	  end
 	end
 
@@ -37,13 +37,12 @@ class TreesController < ApplicationController
 	  set_tree
 	  redirect_if_not_logged_in
 	  if @tree.homeowner == current_user && form_is_filled?
-	  	binding.pry
 	  	flash[:message] = "Your tree was successfully updated"
 	  	@tree.update(variety: params[:variety], size: params[:size], fruit_weight: params[:fruit_weight])
 	  	redirect "/trees/#{@tree.id}"
 	  else
-	  	flash[:errors] = "Only the Homeowner of this tree can edit this tree"
-	  	redirect "homeowners/#{current_user.id}"
+	  	flash[:errors] = "All fields must be filled."
+	  	redirect "/trees/#{@tree.id}/edit"
 	  end
 	end
 
@@ -54,7 +53,6 @@ class TreesController < ApplicationController
 	    @tree.destroy
 	    redirect "/homeowners/#{current_user.id}"
 	  else
-	  	flash[:errors]	= "Only the Homeowner of this tree can delete this tree"
 	  	redirect "/homeowners/#{current_user.id}"
 	  end
 	end
