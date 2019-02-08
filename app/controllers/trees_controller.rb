@@ -20,7 +20,14 @@ class TreesController < ApplicationController
 	get '/trees/:id'  do
 	  redirect_if_not_logged_in	
 	  set_tree
-	  erb :'/trees/show'
+
+	  if @tree.nil?
+	  	redirect "/homeowners"
+
+	  else
+
+	  	erb :'/trees/show'
+	  end
 	end
 
 	get '/trees/:id/edit' do
@@ -61,7 +68,7 @@ class TreesController < ApplicationController
 	private
 
 	def set_tree
-		@tree = Tree.find(params[:id])
+		@tree = Tree.find_by(id: params[:id])
 	end
 
 	def form_is_filled?
